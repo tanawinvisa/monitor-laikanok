@@ -8,8 +8,7 @@ async function fetchGoldPrice() {
 
             document.getElementById('date').innerText = data.response.date;
             document.getElementById('update_time').innerText = data.response.update_time;
-            document.getElementById('gold_buy').innerText = priceData.gold.buy;
-            document.getElementById('gold_sell').innerText = priceData.gold.sell;
+
             document.getElementById('gold_bar_buy').innerText = priceData.gold_bar.buy;
             document.getElementById('gold_bar_sell').innerText = priceData.gold_bar.sell;
             document.getElementById('change_previous').innerText = priceData.change.compare_previous;
@@ -40,3 +39,25 @@ setInterval(fetchGoldPrice, 300000); // 300000 ms = 5 minutes
 
 // Change image every 5 minutes
 setInterval(showRandomImage, 5000); // 300000 ms = 5 minutes
+
+function updateTime() {
+    // Get current time in UTC
+    const now = new Date();
+
+    // Convert UTC time to Thailand time (UTC+7)
+    const thailandTime = new Date(now.getTime() + (7 * 60 * 60 * 1000));
+
+    // Format the time
+    const hours = thailandTime.getUTCHours().toString().padStart(2, '0');
+    const minutes = thailandTime.getUTCMinutes().toString().padStart(2, '0');
+    const seconds = thailandTime.getUTCSeconds().toString().padStart(2, '0');
+
+    // Display the time
+    document.getElementById('time').textContent = `${hours}:${minutes}:${seconds}`;
+}
+
+// Update time every second
+setInterval(updateTime, 1000);
+
+// Initial call to display the time immediately
+updateTime();
