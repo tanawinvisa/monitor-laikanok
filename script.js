@@ -47,3 +47,18 @@ setInterval(fetchGoldPrice, 300000); // 300000 ms = 5 minutes
 
 // Change image every 5 minutes
 setInterval(showRandomImage, 5000); // 300000 ms = 5 minutes 
+
+const fullscreenButton = document.getElementById('logo-image');
+        fullscreenButton.addEventListener('click', toggleFullscreen);
+
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    console.error(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+                });
+            } else {
+                document.exitFullscreen().catch(err => {
+                    console.error(`Error attempting to exit full-screen mode: ${err.message} (${err.name})`);
+                });
+            }
+        }
