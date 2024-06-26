@@ -47,7 +47,7 @@ fetchGoldPrice();
 showRandomImage();
 
 // Fetch gold prices every 5 minutes
-setInterval(fetchGoldPrice, 300000); // 300000 ms = 5 minutes
+setInterval(fetchGoldPrice, 60000); // 300000 ms = 5 minutes
 
 // Change image every 5 minutes
 setInterval(showRandomImage, 5000); // 300000 ms = 5 minutes
