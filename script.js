@@ -1,5 +1,35 @@
 async function fetchGoldPrice() {
   try {
+    const dataUrl = "https://monitor-laikanok-backend.onrender.com/proxy";
+
+    const specialItemResponse = await fetch(dataUrl);
+    const specialItemData = await specialItemResponse.json();
+
+    const targetItem = specialItemData.find(
+      (item) => item.name === "\u0e2a\u0e21\u0e32\u0e04\u0e21\u0e2f"
+    );
+
+    if (targetItem) {
+      console.log(`Name: ${targetItem.name}`);
+      console.log(`Bid: ${targetItem.bid}`);
+      console.log(`Ask: ${targetItem.ask}`);
+      console.log(`Diff: ${targetItem.diff}`);
+      document.getElementById("gold_bar_buy").innerText = parseFloat(
+        targetItem.ask
+      ).toLocaleString(undefined, {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      });
+      document.getElementById("gold_bar_sell").innerText = parseFloat(
+        targetItem.bid
+      ).toLocaleString(undefined, {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      });
+    } else {
+      console.log("Item not found");
+    }
+
     const response = await fetch("https://api.chnwt.dev/thai-gold-api/latest");
     const data = await response.json();
 
@@ -10,14 +40,10 @@ async function fetchGoldPrice() {
       document.getElementById("update_time").innerText =
         data.response.update_time;
 
-      document.getElementById("gold_bar_buy").innerText =
-        priceData.gold_bar.buy;
-      document.getElementById("gold_bar_sell").innerText =
-        priceData.gold_bar.sell;
-      document.getElementById("change_previous").innerText =
-        priceData.change.compare_previous;
-      document.getElementById("change_yesterday").innerText =
-        priceData.change.compare_yesterday;
+      // document.getElementById("change_previous").innerText =
+      //   priceData.change.compare_previous;
+      // document.getElementById("change_yesterday").innerText =
+      //   priceData.change.compare_yesterday;
     } else {
       console.error("Failed to fetch gold prices");
     }
@@ -27,9 +53,7 @@ async function fetchGoldPrice() {
 }
 
 // Predefined list of images
-
 let cntImg = 0;
-// Assuming image files are named sequentially as img1.jpg, img2.jpg, etc.
 const numberOfImages = 52; // Update this to the total number of images you have
 
 function showRandomImage() {
@@ -47,10 +71,10 @@ fetchGoldPrice();
 showRandomImage();
 
 // Fetch gold prices every 5 minutes
-setInterval(fetchGoldPrice, 60000); // 300000 ms = 5 minutes
+setInterval(fetchGoldPrice, 10000); // 300000 ms = 5 minutes
 
 // Change image every 5 minutes
-setInterval(showRandomImage, 5000); // 300000 ms = 5 minutes
+setInterval(showRandomImage, 300000); // 300000 ms = 5 minutes
 
 const fullscreenImg = document.getElementById("logo-image");
 fullscreenImg.addEventListener("click", toggleFullscreen);
