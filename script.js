@@ -74,7 +74,7 @@ showRandomImage();
 setInterval(fetchGoldPrice, 10000); // 300000 ms = 5 minutes
 
 // Change image every 5 minutes
-setInterval(showRandomImage, 300000); // 300000 ms = 5 minutes
+setInterval(showRandomImage, 8000); // 300000 ms = 5 minutes
 
 const fullscreenImg = document.getElementById("logo-image");
 fullscreenImg.addEventListener("click", toggleFullscreen);
