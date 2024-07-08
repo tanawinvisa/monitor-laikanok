@@ -1,6 +1,6 @@
 async function fetchGoldPrice() {
   try {
-    const dataUrl = "https://monitor-laikanok-backend.onrender.com/proxy";
+    const dataUrl = "https://monitor-laikanok-backend.vercel.app/proxy";
 
     const specialItemResponse = await fetch(dataUrl);
     const specialItemData = await specialItemResponse.json();
